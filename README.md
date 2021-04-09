@@ -24,7 +24,7 @@ From the menu, select
 
 ## Wiring the LIDAR-Lite to the Raspberry Pi
 
-![Raspberry Pi Header](https://www.raspberrypi.org/documentation/usage/gpio/images/GPIO-Pinout-Diagram-2.png)
+[Raspberry Pi Header](https://www.raspberrypi.org/documentation/usage/gpio/images/GPIO-Pinout-Diagram-2.png)
 
 On the 40-pin header make the following connections -
 ```
