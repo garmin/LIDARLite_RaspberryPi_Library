@@ -4,7 +4,7 @@
   This library provides quick access to the basic functions of LIDAR-Lite
   via the Raspberry Pi interface. Additionally, it can provide a user of any
   platform with a template for their own application code.
-  
+
   Copyright (c) 2019 Garmin Ltd. or its subsidiaries.
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -164,7 +164,7 @@ void LIDARLite_v3::configure(__u8 configuration, __u8 lidarliteAddress)
 /*------------------------------------------------------------------------------
   Set I2C Address
   Set Alternate I2C Device Address. See Operation Manual for additional info.
-  
+
   Parameters
   ------------------------------------------------------------------------------
   newAddress: desired secondary I2C device address
@@ -200,7 +200,7 @@ void LIDARLite_v3::setI2Caddr(__u8 newAddress, __u8 disableDefault, __u8 lidarli
 /*------------------------------------------------------------------------------
   Take Range
   Initiate a distance measurement by writing to register 0x00.
-  
+
   Parameters
   ------------------------------------------------------------------------------
   lidarliteAddress: Default 0x62. Fill in new address here if changed. See
@@ -216,7 +216,7 @@ void LIDARLite_v3::takeRange(__u8 lidarliteAddress)
 /*------------------------------------------------------------------------------
   Wait for Busy Flag
   Blocking function to wait until the Lidar Lite's internal busy flag goes low
-  
+
   Parameters
   ------------------------------------------------------------------------------
   lidarliteAddress: Default 0x62. Fill in new address here if changed. See
@@ -235,7 +235,7 @@ void LIDARLite_v3::waitForBusy(__u8 lidarliteAddress)
 /*------------------------------------------------------------------------------
   Get Busy Flag
   Read BUSY flag from device registers. Function will return 0x00 if not busy.
-  
+
   Parameters
   ------------------------------------------------------------------------------
   lidarliteAddress: Default 0x62. Fill in new address here if changed. See
@@ -337,7 +337,7 @@ __s32 LIDARLite_v3::i2cRead(__u8 regAddr,  __u8 * dataBytes,
   It has a bipolar wave shape, transitioning from a positive going portion to a
   roughly symmetrical negative going pulse. The point where the signal crosses
   zero represents the effective delay for the reference and return signals.
-  
+
   Process
   ------------------------------------------------------------------------------
   1.  Take a distance reading (there is no correlation record without at least
@@ -347,12 +347,13 @@ __s32 LIDARLite_v3::i2cRead(__u8 regAddr,  __u8 * dataBytes,
       1.  Read two bytes from 0x52
       2.  The Low byte is the value from the record
       3.  The high byte is the sign from the record
+
   Parameters
   ------------------------------------------------------------------------------
-  numberOfReadings: Default = 256. Maximum = 1024
-  corrValues:       pointer to memory location to store the correlation record
+  correlationArray: pointer to memory location to store the correlation record
                     ** Two bytes for every correlation value must be
                        allocated by calling function
+  numberOfReadings: Default = 256. Maximum = 1024
   lidarliteAddress: Default 0x62. Fill in new address here if changed. See
     operating manual for instructions.
 ------------------------------------------------------------------------------*/
