@@ -28,6 +28,7 @@
 #define LLv3_STATUS        0x01
 #define LLv3_SIG_CNT_VAL   0x02
 #define LLv3_ACQ_CONFIG    0x04
+#define LLv3_SIGNAL_STR    0x0e
 #define LLv3_DISTANCE      0x0f
 #define LLv3_REF_CNT_VAL   0x12
 #define LLv3_UNIT_ID_HIGH  0x16
@@ -50,6 +51,7 @@ class LIDARLite_v3
         void      configure   (__u8 configuration = 0, __u8 lidarliteAddress = LIDARLITE_ADDR_DEFAULT);
         void      setI2Caddr  (__u8 newAddress, __u8 disableDefault, __u8 lidarliteAddress = LIDARLITE_ADDR_DEFAULT);
         __u16     readDistance(__u8 lidarliteAddress = LIDARLITE_ADDR_DEFAULT);
+		__u16     readsignalstrength(__u8 lidarliteAddress = LIDARLITE_ADDR_DEFAULT);
         void      waitForBusy (__u8 lidarliteAddress = LIDARLITE_ADDR_DEFAULT);
         __u8      getBusyFlag (__u8 lidarliteAddress = LIDARLITE_ADDR_DEFAULT);
         void      takeRange   (__u8 lidarliteAddress = LIDARLITE_ADDR_DEFAULT);
