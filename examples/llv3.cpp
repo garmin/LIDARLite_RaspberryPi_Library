@@ -26,6 +26,7 @@ LIDARLite_v3 myLidarLite;
 int main()
 {
     __u16 distance;
+	__u16 signalstrength;
     __u8  busyFlag;
 
     // Initialize i2c peripheral in the cpu core
@@ -46,8 +47,9 @@ int main()
             // This method will result in faster I2C rep rates.
             myLidarLite.takeRange();
             distance = myLidarLite.readDistance();
+			signalstrength = myLidarLite.readsignalstrength();
 
-            printf("%4d\n", distance);
+            printf("%4d,%4d\n", distance,signalstrength);
         }
     }
 }
