@@ -28,6 +28,16 @@ int main()
     __u16 distance;
 	__u16 signalstrength;
     __u8  busyFlag;
+	//__u32 distance1;
+	//__u32 signalstrength1;
+	double distance1;
+	double signalstrength1;
+	double i_avg;
+	int i;
+	i_avg = 25;
+	i = -1;
+	distance1 = 0;
+	signalstrength1 = 0;
 
     // Initialize i2c peripheral in the cpu core
     myLidarLite.i2c_init();
@@ -35,6 +45,7 @@ int main()
     // Optionally configure LIDAR-Lite
     myLidarLite.configure(0);
 
+	
     while(1)
     {
         // Each time through the loop, check BUSY
@@ -42,14 +53,33 @@ int main()
 
         if (busyFlag == 0x00)
         {
+			i = i + 1;
             // When no longer busy, immediately initialize another measurement
             // and then read the distance data from the last measurement.
             // This method will result in faster I2C rep rates.
             myLidarLite.takeRange();
             distance = myLidarLite.readDistance();
 			signalstrength = myLidarLite.readsignalstrength();
+			//distance1 = distance1 + (double)distance/100;
+			//signalstrength1 = signalstrength1 + (double)signalstrength/100;
+			//printf("%4d,%4d\n", distance, signalstrength);
+			
+			distance1 		= distance1 		+ 	((double)distance)/i_avg;
+			signalstrength1 = signalstrength1 	+ 	((double)signalstrength)/i_avg;
+			//printf("%d,%d\n", distance1, signalstrength1);
+			
+			if (i>i_avg-1){
+				//printf("%d,%d\n", distance1, signalstrength1);
+				printf("%f,%f\n", distance1, signalstrength1);
+				fflush(stdout);
+				i = -1;
+				
+				distance1 = 0;
+				signalstrength1 = 0;
+			}
+			
 
-            printf("%4d,%4d\n", distance,signalstrength);
+            
         }
     }
 }

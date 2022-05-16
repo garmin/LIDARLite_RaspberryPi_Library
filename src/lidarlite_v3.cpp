@@ -276,6 +276,27 @@ __u16 LIDARLite_v3::readDistance(__u8 lidarliteAddress)
 } /* LIDARLite_v3::readDistance */
 
 /*------------------------------------------------------------------------------
+  Read Signal Strength
+  Read and return result of signal strength measurement.
+
+  Parameters
+  ------------------------------------------------------------------------------
+  lidarliteAddress: Default 0x62. Fill in new address here if changed. See
+    operating manual for instructions.
+------------------------------------------------------------------------------*/
+__u16 LIDARLite_v3::readsignalstrength(__u8 lidarliteAddress)
+{
+    __u8  strengthBytes[2] = {0};
+
+    // Read two bytes from register 0x0f and 0x10 (autoincrement)
+    i2cRead((LLv3_SIGNAL_STR | 0x80), strengthBytes, 2, lidarliteAddress);
+
+    // Shift high byte and OR in low byte
+    return ((strengthBytes[0] << 8) | strengthBytes[1]);
+} /* LIDARLite_v3::readsignalstrength */
+
+
+/*------------------------------------------------------------------------------
   Write
   Perform I2C write to device.
 
